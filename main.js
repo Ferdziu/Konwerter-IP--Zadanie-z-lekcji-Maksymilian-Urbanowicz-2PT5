@@ -6,9 +6,8 @@ let inpOUT = document.querySelectorAll("input[class=out]"); //4 inputs
 let msgs = document.querySelector("#msgs"); //inpIN equolse
 let out = document.querySelector("#out"); //inpOUT equolse
 
-//Specifict buttons
+//Specifict button
 let cls = document.querySelector('#clear');
-let copy = document.querySelector("#copy");
 
 //Attributes:
 let tab =[] ; //Element storing to convert
@@ -32,14 +31,12 @@ cls.addEventListener('click', function(){
     
 });
 
-//Copy selected text
-copy.addEventListener('click', Copy, false);
-
 //Starting inpOUT
 for(let elementOUT of inpOUT){
     elementOUT.addEventListener("focusout", function(){
+        let k=0;
         for(let elementOUT2 of inpOUT){
-            tab[k] = elementOUT2.value;
+            tab[k++] = elementOUT2.value;
             is4=true;
             parsing();
         }
@@ -61,14 +58,13 @@ for(let i=0; i< inpOUT.length; i++)
             elementOUT2.value = null;
         }
 
-        inpOUT[i].setAttribute('maxlength', 36);
+        inpOUT[i].setAttribute('maxlength', "36");
         inpOUT[i].oninput =()=>{
-            
             let inpIvalue = inpOUT[i].value;
             tab = inpIvalue.split(".");   
-
+            let k=0;
             for(let elementOUT2 of inpOUT){
-                elementOUT2.value = tab[k];
+                elementOUT2.value = tab[k++];
                 elementOUT2.setAttribute('maxlength', "8");
             }
         };  
